@@ -1,3 +1,6 @@
+import pandas as pd
+
+
 def main():
     print("Hello from 2026-01-find-restaurant!")
 
