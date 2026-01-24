@@ -1,0 +1,16 @@
+name,category,lat,lon,price_level,rating,review_count,address
+The Coffee House,cafe,37.7749,-122.4194,2,4.5,234,123 Market St
+Burger Palace,restaurant,37.7751,-122.4180,2,4.2,189,456 Mission St
+Sakura Sushi,restaurant,37.7855,-122.4090,3,4.7,312,789 Post St
+Morning Glory Cafe,cafe,37.7820,-122.4100,1,4.1,98,321 Hayes St
+La Pizzeria,restaurant,37.7760,-122.4210,2,4.3,267,555 Valencia St
+Green Garden,restaurant,37.7890,-122.4050,3,4.6,198,777 Fillmore St
+Taco Loco,restaurant,37.7700,-122.4300,1,4.0,156,888 Mission St
+Blue Bottle Coffee,cafe,37.7830,-122.4000,2,4.8,445,999 Market St
+Dragon Palace,restaurant,37.7940,-122.4070,2,4.4,223,111 Grant Ave
+The Breakfast Club,cafe,37.7680,-122.4250,1,4.2,134,222 Church St
+Noodle House,restaurant,37.7910,-122.4110,1,3.9,87,333 Clement St
+Steakhouse 55,restaurant,37.7870,-122.4030,4,4.6,356,444 California St
+Cafe Luna,cafe,37.7720,-122.4180,1,4.0,112,555 Haight St
+Mumbai Spice,restaurant,37.7800,-122.4150,2,4.5,198,666 Geary St
+The Wine Bar,bar,37.7850,-122.4060,3,4.3,167,777 Union St
