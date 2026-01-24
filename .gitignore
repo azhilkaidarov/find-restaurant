@@ -1,3 +1,5 @@
 .venv/
 .env
 .cursor/
+.flake8
+__pycache__/
