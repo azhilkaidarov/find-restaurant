@@ -29,9 +29,14 @@ def isopen_filter(df: pd.DataFrame) -> pd.DataFrame:
     return filtered
 
 
-def rating_filter(df: pd.DataFrame, rating: float) -> pd.DataFrame:
+def rating_filter(
+    df: pd.DataFrame,
+    rating: float,
+    min_r: float = 0.0,
+    max_r: float = 5.0
+    ) -> pd.DataFrame:
     # Возвращает организации с рейтингом >= min_rating
-    if df.empty or not (0.0 <= rating <= 5.0):
+    if df.empty or not (min_r <= rating <= max_r):
         raise ValueError("data_filter/rating_filter() - check input.")
 
     filtered = df[df["rating"] >= rating]
@@ -42,9 +47,16 @@ def rating_filter(df: pd.DataFrame, rating: float) -> pd.DataFrame:
     return filtered
 
 
-def distance_filter(df: pd.DataFrame, lat: float, lon: float, max_dist_ml: float) -> pd.DataFrame:
+def distance_filter(
+    df: pd.DataFrame,
+    lat: float,
+    lon: float,
+    max_dist_ml: float,
+    lat_range: tuple[float, float] = (-90, 90),
+    lon_range: tuple[float, float] = (-180, 180),
+    ) -> pd.DataFrame:
     # Возвращает организации в выбранном диапазоне поиска
-    if df.empty or not (-90 <= lat <= 90) or not (-180 <= lon <= 180):
+    if df.empty or not (lat_range[0] <= lat <= lat_range[1]) or not (lon_range[0] <= lon <= lon_range[1]):
         raise ValueError("data_filter/distance_filter() - check input.")
 
     df = add_distance_column(df, lat, lon)
@@ -58,8 +70,6 @@ def distance_filter(df: pd.DataFrame, lat: float, lon: float, max_dist_ml: float
 
 def add_distance_column(df: pd.DataFrame, user_lat: float, user_lon: float) -> pd.DataFrame:
     # Добавляет к df фичу текущего расстония от юзера от организации
-    df = df.copy()
-
     df["distance_ml"] = df.apply(
         lambda row: get_distance(
             (user_lat, user_lon),
