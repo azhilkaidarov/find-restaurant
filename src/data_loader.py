@@ -5,7 +5,9 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-GOOGLE_MAPS_API_KEY = os.getenv("GOOGLE_MAP_API_KEY")
+GOOGLE_MAPS_API_KEY = os.getenv("GOOGLE_MAPS_API_KEY")
+if not GOOGLE_MAPS_API_KEY:
+    raise ValueError("GOOGLE_MAPS_API_KEY is missing!")
 gmaps = googlemaps.Client(key=GOOGLE_MAPS_API_KEY)
 
 
@@ -21,6 +23,7 @@ def fetch_restaurant(
         )
     except Exception as e:
         print(f"Error - : {e}")
+        raise
 
     places = results.get("results", [])
 
@@ -40,5 +43,8 @@ def fetch_restaurant(
     }
     df = df.rename(columns=columns)
     available_cols = [c for c in columns.values() if c in df.columns]
+
+    if not available_cols:
+        raise ValueError("API returned data, but it doesn't contain any expected columns.")
 
     return df[available_cols]
