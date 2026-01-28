@@ -12,11 +12,15 @@ A Python project for searching and filtering restaurants using Pandas and Google
 ## Project Structure
 
 ```
-src/
-├── geo_utils.py      # Geocoding and distance calculation
-├── data_loader.py    # Google Places API integration
-├── data_filter.py    # DataFrame filtering and sorting
-└── main.py           # Main entry point
+├── configs/
+│   └── input.json         # Search parameters & filters
+├── src/
+│   ├── main.py            # Main entry point
+│   ├── geo_utils.py       # Geocoding & distance logic
+│   ├── data_loader.py     # Google Places API integration
+│   ├── data_filter.py     # Pandas-based filtering & 
+│   └── file_handler.py    # JSON reading & CSV saving
+└── .env.example       # Template for your API keys
 ```
 
 ## Installation
