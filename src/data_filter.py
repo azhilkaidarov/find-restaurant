@@ -4,7 +4,8 @@ from geo_utils import get_distance
 
 
 def level_price_filter(df: pd.DataFrame, level_price: float) -> pd.DataFrame:
-    # в GOOGLE MAPS ср. чека нет, только price level. Вернет организации с level_price <=
+    # Google Places API doesn't provide an average bill, only price_level.
+    # Returns places with price_level <= level_price.
     if df.empty or not (0 <= level_price <= 3):
         raise ValueError("data_filter/cost_filter() - check input.")
 
@@ -16,15 +17,15 @@ def level_price_filter(df: pd.DataFrame, level_price: float) -> pd.DataFrame:
     return filtered
 
 
-def isopen_filter(df: pd.DataFrame) -> pd.DataFrame:
-    # Возвращает открытые организации
+def only_open_filter(df: pd.DataFrame) -> pd.DataFrame:
+    # Returns only currently open places.
     if df.empty:
         raise ValueError("data_filter/isopen_filter() - check input.")
 
     filtered = df[df["is_open"] == True]
 
     if filtered.empty:
-        print("No ioen organization found this time.")
+        print("No open organization found this time.")
 
     return filtered
 
@@ -35,7 +36,7 @@ def rating_filter(
     min_r: float = 0.0,
     max_r: float = 5.0
     ) -> pd.DataFrame:
-    # Возвращает организации с рейтингом >= min_rating
+    # Returns places with ratings >= params.rating .
     if df.empty or not (min_r <= rating <= max_r):
         raise ValueError("data_filter/rating_filter() - check input.")
 
@@ -47,29 +48,8 @@ def rating_filter(
     return filtered
 
 
-def distance_filter(
-    df: pd.DataFrame,
-    lat: float,
-    lon: float,
-    max_dist_ml: float,
-    lat_range: tuple[float, float] = (-90, 90),
-    lon_range: tuple[float, float] = (-180, 180),
-    ) -> pd.DataFrame:
-    # Возвращает организации в выбранном диапазоне поиска
-    if df.empty or not (lat_range[0] <= lat <= lat_range[1]) or not (lon_range[0] <= lon <= lon_range[1]):
-        raise ValueError("data_filter/distance_filter() - check input.")
-
-    df = add_distance_column(df, lat, lon)
-    filtered = df[df["distance_ml"] <= max_dist_ml]
-
-    if filtered.empty:
-        print(f"No organization found in: {max_dist_ml} miles")
-
-    return filtered
-
-
-def add_distance_column(df: pd.DataFrame, user_lat: float, user_lon: float) -> pd.DataFrame:
-    # Добавляет к df фичу текущего расстония от юзера от организации
+def show_distance_filter(df: pd.DataFrame, user_lat: float, user_lon: float) -> pd.DataFrame:
+    # Adds a distance_ml column (miles) from the user to each place.
     df["distance_ml"] = df.apply(
         lambda row: get_distance(
             (user_lat, user_lon),
@@ -82,5 +62,5 @@ def add_distance_column(df: pd.DataFrame, user_lat: float, user_lon: float) -> p
 
 
 def sort_by(df: pd.DataFrame, column: str, ascending: bool = True) -> pd.DataFrame:
-    # Отсортирует организации по выбранной фиче
+    # Sorts places by the selected column.
     return df.sort_values(by=column, ascending=ascending)

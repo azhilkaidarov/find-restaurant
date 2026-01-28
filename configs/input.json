@@ -1,0 +1,8 @@
+{
+    "address": "6549 N Harrison st Davenport IA 52806 USA",
+    "radius": 1000,
+    "keyword": "restaurant",
+    "min_rating": "4.5",
+    "only_open": 1,
+    "min_level_price": 2
+}
