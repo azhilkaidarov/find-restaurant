@@ -7,7 +7,7 @@ A Python project for searching and filtering restaurants using Pandas and Google
 - **Geocoding**: Convert addresses to coordinates using Nominatim
 - **Data Loading**: Fetch restaurant data from Google Places API
 - **Filtering**: Filter restaurants by price level, rating, distance, and open status
-- **Sorting**: Sort results by any column
+- **Sorting**: Sort results by any column (edited)
 
 ## Project Structure
 
