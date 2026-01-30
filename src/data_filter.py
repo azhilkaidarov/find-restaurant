@@ -2,6 +2,7 @@ import pandas as pd
 
 from geo_utils import get_distance
 
+# Sample change, dont forget to delete this later
 
 def level_price_filter(df: pd.DataFrame, level_price: float) -> pd.DataFrame:
     # Google Places API doesn't provide an average bill, only price_level.
