@@ -49,7 +49,7 @@ from src.data_loader import fetch_restaurant
 from src.data_filter import level_price_filter, rating_filter, distance_filter, sort_by
 from src.geo_utils import get_coordinates
 
-# Fetch restaurants near coordinates
+# Fetch restaurants near coordinates or provide your address to get_coordinates()
 df = fetch_restaurant(lat=41.553074, lon=-90.577842, radius=1000)
 
 # Apply filters
